@@ -1,4 +1,4 @@
 snowflake-snowpark-python[pandas]
-sklearn
+scikit-learn
 pandas
 pytest
