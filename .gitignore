@@ -6,3 +6,6 @@ app.zip
 .packages
 .ipynb_checkpoints
 *_converted.py
+bin
+lib
+pyvenv.cfg
