@@ -51,7 +51,7 @@ jobs:
       - name: Read manifest
         run: cat ../prior_state/manifest.json
       - name: Run DBT
-        run: dbt run
+        run: dbt run --select state:modified+ --defer --state ../prior_state/
       - name: Generate Manifest file
         run: dbt compile
       - name: Move the generated file
