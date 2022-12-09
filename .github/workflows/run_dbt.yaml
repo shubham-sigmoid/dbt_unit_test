@@ -52,6 +52,13 @@ jobs:
         run: cat ../prior_state/manifest.json
       - name: Run DBT
         run: dbt run
+      - name: Generate Manifest file
+        run: dbt compile
+      - name: Move the generated file
+        run: cat ./target/manifest.json && mv ./target/manifest.json ../prior_state/manifest.json
+      - name: Upload manifest
+        run: ~/bin/snowsql -q "PUT file://../prior/manifest.json @DBT_TEST.UTILL_COMMON.%DBT_TEST"
+
       
       
   
