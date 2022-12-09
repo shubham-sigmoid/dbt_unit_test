@@ -41,7 +41,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: List the directory
         run: |
-          ~/bin/bash -c 'ls -la && pwd' -o friendly=false
+          ls -la && pwd
       
   delete:
     if: github.event.ref_type == 'branch'
