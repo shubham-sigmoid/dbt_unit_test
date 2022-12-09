@@ -10,3 +10,6 @@ bin
 lib
 pyvenv.cfg
 share
+target/
+dbt_packages/
+logs/

@@ -1,0 +1,13 @@
+dbt_insta:
+  outputs:
+    dev:
+      account: "{{ env_var('SNOWSQL_ACCOUNT')}}"
+      database: "{{ env_var('SNOWSQL_DATABASE')}}"
+      password: "{{ env_var('SNOWSQL_PWD')}}"
+      role: "{{ env_var('SNOWSQL_ROLE')}}"
+      schema: UNIT_TESTING
+      threads: 5
+      type: snowflake
+      user: "{{ env_var('SNOWSQL_USER')}}"
+      warehouse: "{{ env_var('SNOWSQL_WAREHOUSE')}}"
+  target: dev
