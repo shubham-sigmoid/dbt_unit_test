@@ -44,6 +44,6 @@ jobs:
       - name: Read manifest
         run: cat ../prior_state/manifest.json
       - name: Run DBT
-        run: $ dbt run --select state:modified+ --defer --state ../prior_state/
+        run: dbt run --select state:modified+ --defer --state ../prior_state/
       
   
