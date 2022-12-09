@@ -57,7 +57,8 @@ jobs:
       - name: Move the generated file
         run: cat ./target/manifest.json && mv ./target/manifest.json ../prior_state/manifest.json
       - name: Upload manifest
-        run: ~/bin/snowsql -q "PUT file://../prior/manifest.json @DBT_TEST.UTILL_COMMON.%DBT_TEST"
+        run: ~/bin/snowsql -q "PUT file://../prior_state/manifest.json @DBT_TEST.UTILL_COMMON.%DBT_STATE" && ~/bin/snowsql -q "COPY INTO DBT_TEST.UTILL_COMMON.DBT_STATE from (SELECT $1,current_timestamp() from @DBT_TEST.UTILL_COMMON.%DBT_STATE ) file_format = (type = 'json' ) PURGE = TRUE"
+        
 
       
       
