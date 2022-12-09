@@ -40,6 +40,8 @@ jobs:
       - name: List the directory
         run: |
           ls -la && pwd
+      - name: Run DBT
+        run: dbt run
       
   delete:
     if: github.event.ref_type == 'branch'
