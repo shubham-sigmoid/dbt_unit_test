@@ -35,10 +35,15 @@ jobs:
         run: pip3 install -r requirements.txt
       - name: Check DBT Version
         run : dbt --version
-      - name: List the directory
+      - name: Install SnowSQL
         run: |
-          ls -la && pwd
+          curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.23-linux_x86_64.bash
+          SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.23-linux_x86_64.bash
+      - name: Fetch Manifest file
+        run: mkdir ../prior_state && ~/bin/snowsql -q "select Manifest from DBT_TEST.UTILL_COMMON.DBT_STATE order by insertion_time desc limit 1" -w  MINE -o friendly=false -o timing=false -o header=false -o output_format=plain > ../prior_state/manifest.json
+      - name: Read manifest
+        run: cat ../prior_state/manifest.json
       - name: Run DBT
-        run: dbt run
+        run: $ dbt run --select state:modified+ --defer --state ../prior_state/
       
   
