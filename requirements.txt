@@ -1,4 +1,1 @@
-snowflake-snowpark-python[pandas]
-scikit-learn
-pandas
-pytest
+dbt-snowflake

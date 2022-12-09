@@ -35,6 +35,8 @@ jobs:
           python-version: "3.8"
       - name: Install python packages
         run: pip install -r requirements.txt
+      - name: Check DBT Version
+        run : dbt --version
       - name: List the directory
         run: |
           ls -la && pwd
