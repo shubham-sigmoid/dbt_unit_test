@@ -43,6 +43,11 @@ jobs:
           ls -la && pwd
       - name: Fetch Manifest file
         run: mkdir ../prior_state && ~/bin/snowsql -q "select Manifest from DBT_TEST.UTILL_COMMON.DBT_STATE order by insertion_time desc limit 1" -w  MINE -o friendly=false -o timing=false -o header=false -o output_format=plain > ../prior_state/manifest.json
+      - name: Get manifest file
+        id: vars
+        run: echo ::set-output name=manifest::$(cat ../prior_state/manifest.json)
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.version }}
       - name: Read manifest
         run: cat ../prior_state/manifest.json
       - name: Run DBT
