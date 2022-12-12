@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: details
+    tests:
+      - dbt_utils.equality:
+        compare_model: ref ('details_expected')
+
+sources:
+  - name: snowflake
+    database: dbt_test
+    schema: raw
+    tables: 
+      - name: customer
+      - name: contact
