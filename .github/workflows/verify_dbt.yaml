@@ -50,5 +50,7 @@ jobs:
         run: cat ../prior_state/manifest.json
       - name: Run DBT
         run: dbt run --target unit-test --select state:modified+ --defer --state ../prior_state/
+      - name: Run Test
+        run: dbt test --target unit-test --select state:modified+ --defer --state ../prior_state/
       
   
