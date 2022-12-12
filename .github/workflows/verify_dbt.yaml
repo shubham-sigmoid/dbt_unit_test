@@ -46,11 +46,15 @@ jobs:
           SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.23-linux_x86_64.bash
       - name: Fetch Manifest file
         run: mkdir ../prior_state && ~/bin/snowsql -q "select Manifest from DBT_TEST.UTILL_COMMON.DBT_STATE order by insertion_time desc limit 1" -w  MINE -o friendly=false -o timing=false -o header=false -o output_format=plain > ../prior_state/manifest.json
-      - name: Read manifest
-        run: cat ../prior_state/manifest.json
-      - name: Run DBT
-        run: dbt run --target unit-test --select state:modified+ --defer --state ../prior_state/
-      - name: Run Test
-        run: dbt test --target unit-test --select state:modified+ --defer --state ../prior_state/
+      - name : Drop all tables in testing schema
+        run : ~/bin/snowsql -q "drop table if exists DBT_TEST.UNIT_TESTING.DETAILS;"
+      - name: Run DBT first Pass
+        run: dbt run --target unit-test_1 --select state:modified+ --defer --state ../prior_state/
+      - name: Run Test first Pass
+        run: dbt test --target unit-test_1 --select state:modified+ --defer --state ../prior_state/
+      - name: Run DBT second Pass
+        run: dbt run --target unit-test_2 --select state:modified+ --defer --state ../prior_state/
+      - name: Run Test second Pass
+        run: dbt test --target unit-test_2 --select state:modified+ --defer --state ../prior_state/
       
   

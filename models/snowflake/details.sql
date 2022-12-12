@@ -1,6 +1,8 @@
 {{
   config(
-    materialized = "table"
+        materialized="incremental", 
+        unique_key="Id"
+
   )
 }}
 
