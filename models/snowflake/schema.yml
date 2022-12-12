@@ -4,7 +4,11 @@ models:
   - name: details
     tests:
       - dbt_utils.equality:
-        compare_model: ref ('details_expected')
+          compare_model: ref('details_expected')
+          compare_columns:
+            - name
+            - id
+            - city
 
 sources:
   - name: snowflake
