@@ -4,7 +4,7 @@ models:
   - name: details
     tests:
       - dbt_utils.equality:
-          compare_model: ref('details_expected')
+          compare_model: "{{ ref( target.name | replace('unit-test_','details_expected_') ) }}"
           compare_columns:
             - name
             - id
@@ -22,5 +22,7 @@ sources:
     database: dbt_test
     schema: unit_testing
     tables:
-      - name: test_contact
-      - name: test_customer
+      - name: test_contact_1
+      - name: test_customer_1
+      - name: test_contact_2
+      - name: test_customer_2
