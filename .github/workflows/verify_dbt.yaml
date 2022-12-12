@@ -38,7 +38,7 @@ jobs:
       - name: Run dbt deps
         run: dbt deps
       - name: Run dbt seeds
-        run: dbt seed --target unit-test
+        run: dbt seed --target unit-test_1
       
       - name: Install SnowSQL
         run: |
