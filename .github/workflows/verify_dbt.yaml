@@ -35,6 +35,11 @@ jobs:
         run: pip3 install -r requirements.txt
       - name: Check DBT Version
         run : dbt --version
+      - name: Run dbt deps
+        run: dbt deps
+      - name: Run dbt seeds
+        run: dbt seed --target unit-test
+      
       - name: Install SnowSQL
         run: |
           curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.23-linux_x86_64.bash
@@ -44,6 +49,6 @@ jobs:
       - name: Read manifest
         run: cat ../prior_state/manifest.json
       - name: Run DBT
-        run: dbt run --select state:modified+ --defer --state ../prior_state/
+        run: dbt run --target unit-test --select state:modified+ --defer --state ../prior_state/
       
   
