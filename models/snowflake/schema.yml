@@ -17,3 +17,10 @@ sources:
     tables: 
       - name: customer
       - name: contact
+
+  - name: test_snowflake
+    database: dbt_test
+    schema: unit_testing
+    tables:
+      - name: test_contact
+      - name: test_customer
