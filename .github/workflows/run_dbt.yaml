@@ -34,6 +34,8 @@ jobs:
         run: pip3 install -r requirements.txt
       - name: Check DBT Version
         run : dbt --version
+      - name: Run dbt deps
+        run: dbt deps
       - name: Install SnowSQL
         run: |
           curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.23-linux_x86_64.bash
